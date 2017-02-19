@@ -14,19 +14,19 @@ fail_test_string = "lots of jobs on offer"
 
 
 def test_regex_type():
-    assert isinstance(re.compile(''), type(constants.job_regex))
+    assert isinstance(re.compile(''), type(constants.JOB_REGEX))
 
 
 def test_regex_match_type():
-    match = constants.job_regex.search(test_string)
+    match = constants.JOB_REGEX.search(test_string)
     assert isinstance(re.match('', ''), type(match))
 
 
 def test_regex_match():
-    match = constants.job_regex.search(test_string)
+    match = constants.JOB_REGEX.search(test_string)
     assert match
 
 
 def test_regex_match_fail():
-    match = constants.job_regex.search(fail_test_string)
+    match = constants.JOB_REGEX.search(fail_test_string)
     assert not match

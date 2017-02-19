@@ -14,7 +14,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from urllib.parse import urlparse
 from email_client import send_email
-from constants import job_regex
+from constants import JOB_REGEX
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(os.path.splitext(os.path.basename(sys.argv[0]))[0])
@@ -49,7 +49,7 @@ try:
     raw_html = response.text
     jQuery = PyQuery(raw_html)
     job_list = jQuery('.job-list').text()
-    match = job_regex.search(job_list)
+    match = JOB_REGEX.search(job_list)
     email_message['Subject'] = "Jobs Available at: " + SERVER_HOST
     body = "Content Retrieved from " + SERVER_HOST + ":\n" + job_list
     email_message.attach(MIMEText(body, 'plain'))
