@@ -25,7 +25,7 @@ try:
     SERVER_URL = sys.argv[1]
 except IndexError as error:
     print('need to supply a URL as the first argument')
-    logger.error('need to supply a URL as the first argument', exc_info=True)
+    logger.error('need to supply a URL as the first argument: ' + str(error), exc_info=True)
     sys.exit(1)
 
 SERVER_HOST = urlparse(SERVER_URL).netloc

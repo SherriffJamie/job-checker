@@ -1,11 +1,12 @@
 import os, sys, inspect
+import re
 
+# TODO figure out better approach than this
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 
 import constants
-import re
 
 test_string = "Current job offers Sorry, there are currently no vacancies You can send us your CV anyway and we'll " \
               "contact you if a position that matches your qualifications becomes vacant. Submit your CV"
