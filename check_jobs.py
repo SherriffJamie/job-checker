@@ -28,6 +28,11 @@ except IndexError as error:
     logger.error('need to supply a URL as the first argument: ' + str(error), exc_info=True)
     sys.exit(1)
 
+parse_result = urlparse(SERVER_URL)
+if not bool(parse_result.scheme) and not bool(parse_result.netloc):
+    logger.error(str(SERVER_URL) + " :server url needs to be valid", exc_info=True)
+    raise ValueError(str(SERVER_URL) + " :server url needs to be valid")
+
 SERVER_HOST = urlparse(SERVER_URL).netloc
 email = {
     'address': os.environ.get('GMAIL_ADDRESS'),
