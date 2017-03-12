@@ -52,6 +52,9 @@ email_message['To'] = ', '.join(email['reciever'])
 try:
     response = requests.get(SERVER_URL, timeout=30)
     response.raise_for_status()
+    if response.url != SERVER_URL: #update host for redirects ex. goo.gl links
+        logger.debug('Updating server host to match what was retreived')
+        SERVER_HOST = urlparse(response.url).netloc
     raw_html = response.text
     jQuery = PyQuery(raw_html)
     job_list = None
@@ -60,7 +63,7 @@ try:
         if job_list:
             break
     if not job_list:
-        logger.info('Running job checker against: ' + SERVER_HOST + 'and could not parse page')
+        logger.info('Running job checker against: ' + SERVER_HOST + ' and could not parse page')
         email_message['Subject'] = "Job Checker could not parse page at: " + SERVER_HOST
         body = "Raw HTML FROM: " + SERVER_HOST + ":\n" + jQuery.html(method='html')
         email_message.attach(MIMEText(body, 'plain'))
